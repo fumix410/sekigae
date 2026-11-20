@@ -19,13 +19,21 @@ export function SeatGrid({ layout, renderSeat }: Props) {
     }
   }
   const deskBottom = layout.desk === 'bottom';
-  const desk = <div className={`teacher-desk ${deskBottom ? 'at-bottom' : ''}`}>教卓</div>;
+  const desk = (
+    <div
+      className={`mx-auto w-[min(240px,60%)] rounded-md border-2 border-desk bg-desk/10 py-1 text-center text-sm font-bold tracking-widest text-desk ${
+        deskBottom ? 'mt-4' : 'mb-4'
+      }`}
+    >
+      教卓
+    </div>
+  );
   return (
-    <div className="classroom">
+    <div className="classroom my-4">
       {!deskBottom && desk}
-      <div className="seat-grid-scroll">
+      <div className="seat-grid-scroll overflow-x-auto pb-1">
         <div
-          className="seat-grid"
+          className="seat-grid p-1"
           style={
             {
               gridTemplateColumns: `repeat(${layout.cols}, minmax(4.5rem, 1fr))`,

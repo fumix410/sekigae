@@ -1,7 +1,14 @@
 import { useState } from 'react';
+import { PlusIcon } from 'lucide-react';
 import { newId, useStore } from '../state/store';
 import type { Constraint, ConstraintType } from '../types';
 import { enabledSeats, seatLabel } from '../logic/geometry';
+import { Hint } from './Section';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const TYPE_LABELS: Record<ConstraintType, string> = {
   notAdjacent: '2人を隣にしない',
@@ -62,75 +69,99 @@ export function ConstraintForm() {
   };
 
   if (state.students.length === 0) {
-    return <p className="hint">名簿を登録すると、生徒ごとの条件を追加できます。</p>;
+    return <Hint>名簿を登録すると、生徒ごとの条件を追加できます。</Hint>;
   }
 
   const studentSelect = (value: string, onChange: (v: string) => void, label: string) => (
-    <select value={value} onChange={(e) => onChange(e.target.value)} aria-label={label}>
-      <option value="">{label}を選ぶ</option>
-      {state.students.map((s) => (
-        <option key={s.id} value={s.id}>
-          {s.name}
-        </option>
-      ))}
-    </select>
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger aria-label={label} className="w-full">
+        <SelectValue placeholder={`${label}を選ぶ`} />
+      </SelectTrigger>
+      <SelectContent position="popper" className="max-h-72">
+        {state.students.map((s) => (
+          <SelectItem key={s.id} value={s.id}>
+            {s.name}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 
   return (
-    <div className="constraint-form">
-      <h3>条件を追加</h3>
-      <div className="stack">
-        <select value={type} onChange={(e) => setType(e.target.value as ConstraintType)} aria-label="条件の種類">
+    <div className="flex flex-col gap-2.5 rounded-lg border border-dashed bg-muted/40 p-3">
+      <h3 className="text-sm font-semibold">条件を追加</h3>
+      <Select value={type} onValueChange={(v) => setType(v as ConstraintType)}>
+        <SelectTrigger aria-label="条件の種類" className="w-full bg-background">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent position="popper">
           {(Object.keys(TYPE_LABELS) as ConstraintType[]).map((t) => (
-            <option key={t} value={t}>
+            <SelectItem key={t} value={t}>
               {TYPE_LABELS[t]}
-            </option>
+            </SelectItem>
           ))}
-        </select>
+        </SelectContent>
+      </Select>
+      <div className={isPair ? 'grid grid-cols-2 gap-2' : 'grid'}>
         {studentSelect(a, setA, isPair ? '1人目' : '生徒')}
         {isPair && studentSelect(b, setB, '2人目')}
-
-        {type === 'notAdjacent' && (
-          <label>
-            <input type="checkbox" checked={diagonal} onChange={(e) => setDiagonal(e.target.checked)} />
-            斜めも隣とみなす
-          </label>
-        )}
-        {type === 'apart' && (
-          <label>
-            間に
-            <input type="number" min={1} max={10} value={gap} onChange={(e) => setGap(Math.max(1, e.target.valueAsNumber || 1))} />
-            席以上あける
-          </label>
-        )}
-        {type === 'frontRows' && (
-          <label>
-            前から
-            <input
-              type="number"
-              min={1}
-              max={state.layout.rows}
-              value={rows}
-              onChange={(e) => setRows(Math.max(1, e.target.valueAsNumber || 1))}
-            />
-            番目以内
-          </label>
-        )}
-        {type === 'fixedSeat' && (
-          <select value={seat} onChange={(e) => setSeat(e.target.value)} aria-label="席">
-            <option value="">席を選ぶ</option>
-            {seats.map((k) => (
-              <option key={k} value={k}>
-                {seatLabel(k)}
-              </option>
-            ))}
-          </select>
-        )}
-        <button className="primary" onClick={submit}>
-          追加
-        </button>
       </div>
-      {error && <p className="warn-text">{error}</p>}
+
+      {type === 'notAdjacent' && (
+        <Label className="font-normal">
+          <Checkbox checked={diagonal} onCheckedChange={(v) => setDiagonal(v === true)} />
+          斜めも隣とみなす
+        </Label>
+      )}
+      {type === 'apart' && (
+        <div className="flex items-center gap-2 text-sm">
+          間に
+          <Input
+            type="number"
+            min={1}
+            max={10}
+            value={gap}
+            className="w-16 bg-background"
+            aria-label="あける席の数"
+            onChange={(e) => setGap(Math.max(1, e.target.valueAsNumber || 1))}
+          />
+          席以上あける
+        </div>
+      )}
+      {type === 'frontRows' && (
+        <div className="flex items-center gap-2 text-sm">
+          前から
+          <Input
+            type="number"
+            min={1}
+            max={state.layout.rows}
+            value={rows}
+            className="w-16 bg-background"
+            aria-label="前から何番目以内"
+            onChange={(e) => setRows(Math.max(1, e.target.valueAsNumber || 1))}
+          />
+          番目以内
+        </div>
+      )}
+      {type === 'fixedSeat' && (
+        <Select value={seat} onValueChange={setSeat}>
+          <SelectTrigger aria-label="席" className="w-full bg-background">
+            <SelectValue placeholder="席を選ぶ" />
+          </SelectTrigger>
+          <SelectContent position="popper" className="max-h-72">
+            {seats.map((k) => (
+              <SelectItem key={k} value={k}>
+                {seatLabel(k)}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      )}
+      {error && <p className="text-sm text-destructive">{error}</p>}
+      <Button onClick={submit} className="self-start">
+        <PlusIcon data-icon="inline-start" />
+        追加
+      </Button>
     </div>
   );
 }

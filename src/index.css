@@ -6,577 +6,80 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --app-bg: #f6f5f1;
-  --app-surface: #ffffff;
-  --app-text: #1f2328;
-  --app-muted: #5f6670;
-  --app-border: #d8d6cf;
-  --app-accent: #2f6f4f;
-  --app-accent-text: #ffffff;
-  --app-danger: #b42318;
-  --app-warn-bg: #fff1e6;
-  --app-warn-border: #e8590c;
-  --app-picked: #f2c94c;
-  --app-desk: #6b4f2a;
-  color-scheme: light;
-  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Meiryo, system-ui, sans-serif;
-  line-height: 1.6;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.975 0.004 95);
+  --foreground: oklch(0.2 0.01 250);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.2 0.01 250);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.2 0.01 250);
+  --primary: oklch(0.48 0.09 158);
   --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --secondary: oklch(0.955 0.01 158);
+  --secondary-foreground: oklch(0.32 0.06 158);
+  --muted: oklch(0.96 0.004 95);
+  --muted-foreground: oklch(0.5 0.01 250);
+  --accent: oklch(0.955 0.01 158);
+  --accent-foreground: oklch(0.32 0.06 158);
+  --destructive: oklch(0.577 0.215 27);
+  --border: oklch(0.9 0.006 95);
+  --input: oklch(0.88 0.006 95);
+  --ring: oklch(0.62 0.09 158);
+  --warn: oklch(0.97 0.03 60);
+  --warn-border: oklch(0.7 0.17 50);
+  --warn-foreground: oklch(0.45 0.13 45);
+  --picked: oklch(0.82 0.15 85);
+  --desk: oklch(0.45 0.06 70);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
   --chart-4: oklch(0.371 0 0);
   --chart-5: oklch(0.269 0 0);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(0.955 0.005 95);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) {
-    --app-bg: #17191c;
-    --app-surface: #212429;
-    --app-text: #e6e6e3;
-    --app-muted: #a0a6ad;
-    --app-border: #3a3e45;
-    --app-accent: #5fb38a;
-    --app-accent-text: #0e1a14;
-    --app-danger: #ff8a80;
-    --app-warn-bg: #3a2414;
-    --app-warn-border: #ff922b;
-    --app-picked: #b8962e;
-    --app-desk: #a5814f;
-    color-scheme: dark;
-  }
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: var(--app-bg);
-  color: var(--app-text);
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-}
-
-button {
-  cursor: pointer;
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: 6px;
-  padding: 0.35rem 0.8rem;
-}
-button:hover:not(:disabled) {
-  border-color: var(--app-accent);
-}
-button:disabled {
-  opacity: 0.45;
-  cursor: default;
-}
-button.primary {
-  background: var(--app-accent);
-  color: var(--app-accent-text);
-  border-color: var(--app-accent);
-}
-button.big {
-  font-size: 1.1rem;
-  padding: 0.5rem 1.2rem;
-}
-button.danger {
-  color: var(--app-danger);
-}
-button.link {
-  border: none;
-  background: none;
-  padding: 0.1rem 0.3rem;
-  text-decoration: underline;
-}
-
-input,
-select,
-textarea {
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: 6px;
-  padding: 0.3rem 0.5rem;
-}
-input[type='number'] {
-  width: 4.5rem;
-  margin: 0 0.3rem;
-}
-
-.app {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 16px 32px;
-}
-
-.app-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  padding: 1rem 0 0.5rem;
-}
-.app-header h1 {
-  margin: 0;
-  font-size: 1.5rem;
-}
-.header-actions {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.panel {
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  margin-bottom: 1rem;
-}
-.panel h2 {
-  margin: 0 0 0.75rem;
-  font-size: 1.2rem;
-}
-.panel h3 {
-  font-size: 1rem;
-  margin: 1rem 0 0.5rem;
-}
-
-.hint {
-  color: var(--app-muted);
-  font-size: 0.9rem;
-  margin: 0.4rem 0;
-}
-.warn-text {
-  color: var(--app-danger);
-}
-.message {
-  font-weight: bold;
-}
-
-.form-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem 1rem;
-  margin: 0.5rem 0;
-}
-.form-row label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* 2カラム */
-.workspace {
-  display: grid;
-  grid-template-columns: minmax(320px, 400px) minmax(0, 1fr);
-  gap: 1rem;
-  align-items: start;
-}
-.main {
-  position: sticky;
-  top: 0.5rem;
-  min-width: 0;
-  max-height: calc(100vh - 1rem);
-  overflow-y: auto;
-}
-@media (max-width: 860px) {
-  .workspace {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .main {
-    position: static;
-    max-height: none;
-  }
-}
-
-/* 折りたたみセクション */
-.section {
-  background: var(--app-surface);
-  border: 1px solid var(--app-border);
-  border-radius: 10px;
-  margin-bottom: 0.75rem;
-}
-.section > summary {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  padding: 0.7rem 1rem;
-  cursor: pointer;
-  list-style: none;
-  user-select: none;
-}
-.section > summary::-webkit-details-marker {
-  display: none;
-}
-.section > summary::before {
-  content: '▶';
-  font-size: 0.7rem;
-  color: var(--app-muted);
-  transition: transform 0.15s;
-}
-.section[open] > summary::before {
-  transform: rotate(90deg);
-}
-.section-title {
-  font-weight: bold;
-}
-.section-summary {
-  margin-left: auto;
-  color: var(--app-muted);
-  font-size: 0.85rem;
-}
-.section-body {
-  padding: 0 1rem 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-}
-.section-body > textarea,
-.section-body > .roster,
-.section-body > .constraint-form,
-.section-body > .constraint-list {
-  width: 100%;
-}
-.block-label {
-  font-size: 0.9rem;
-}
-.check-label {
-  font-size: 0.95rem;
-}
-.check-label .hint {
-  display: block;
-  margin: 0;
-}
-
-/* 名簿 */
-ol.roster {
-  list-style: none;
-  margin: 0.25rem 0 0;
-  padding: 0;
-  max-height: 50vh;
-  overflow-y: auto;
-  border-top: 1px solid var(--app-border);
-}
-ol.roster li {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0;
-  border-bottom: 1px solid var(--app-border);
-}
-.roster-name {
-  flex: 1;
-  min-width: 0;
-}
-.roster-front {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.15rem;
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-button.icon {
-  border: none;
-  background: none;
-  padding: 0.1rem 0.4rem;
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-/* 条件 */
-.stack {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 0.4rem;
-}
-.stack > label {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-.stack > button {
-  align-self: flex-start;
-}
-
-/* 座席表の編集モード */
-.edit-banner {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.5rem;
-  background: var(--app-warn-bg);
-  border: 1px solid var(--app-warn-border);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-}
-
-.constraint-form {
-  border-top: 1px dashed var(--app-border);
-  margin-top: 0.5rem;
-}
-.constraint-form h3 {
-  margin: 0.75rem 0 0.4rem;
-  font-size: 0.95rem;
-}
-.constraint-list {
-  list-style: none;
-  padding: 0;
-  margin: 0.5rem 0 0;
-}
-.constraint-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.35rem 0.5rem;
-  border-bottom: 1px solid var(--app-border);
-}
-
-/* 教室 */
-.classroom {
-  margin: 0.75rem 0;
-}
-.teacher-desk.at-bottom {
-  margin: 1rem auto 0;
-}
-.teacher-desk {
-  width: min(240px, 60%);
-  margin: 0 auto 1rem;
-  text-align: center;
-  border: 2px solid var(--app-desk);
-  color: var(--app-desk);
-  border-radius: 6px;
-  padding: 0.25rem;
-  font-weight: bold;
-}
-.seat-grid-scroll {
-  overflow-x: auto;
-  padding-bottom: 4px;
-}
-.seat-grid {
-  display: grid;
-  gap: 0.5rem;
-}
-
-.seat {
-  position: relative;
-  height: 3.6rem;
-  width: 100%;
-  border: 1px solid var(--app-border);
-  border-radius: 8px;
-  background: var(--app-surface);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.25rem 1.4rem 0.25rem 0.4rem;
-  user-select: none;
-}
-.seat.is-disabled {
-  background: repeating-linear-gradient(45deg, transparent 0 6px, var(--app-border) 6px 7px);
-  border-style: dashed;
-  color: var(--app-muted);
-}
-.seat-toggle {
-  padding: 0;
-}
-.enable-seat {
-  cursor: pointer;
-}
-.enable-seat .enable-hint {
-  font-size: 0.8rem;
-  opacity: 0;
-}
-.enable-seat:hover .enable-hint,
-.enable-seat:focus-visible .enable-hint {
-  opacity: 1;
-}
-@media (hover: none) {
-  .enable-seat .enable-hint {
-    opacity: 0.7;
-  }
-}
-@media print {
-  .enable-seat .enable-hint {
-    display: none;
-  }
-}
-.seat.empty {
-  border-style: dashed;
-}
-.seat.occupied {
-  cursor: grab;
-}
-.seat .name {
-  font-weight: bold;
-  text-align: center;
-  font-size: 0.95rem;
-  line-height: 1.2;
-  word-break: break-all;
-}
-.seat.warn {
-  background: var(--app-warn-bg);
-  border-color: var(--app-warn-border);
-}
-.seat.locked {
-  box-shadow: inset 0 0 0 2px var(--app-accent);
-}
-.seat.picked,
-.chip.picked {
-  outline: 3px solid var(--app-picked);
-  outline-offset: 1px;
-}
-.seat .lock {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  border: none;
-  background: none;
-  padding: 0 2px;
-  font-size: 0.8rem;
-  opacity: 0.35;
-}
-.seat .lock.on,
-.seat:hover .lock {
-  opacity: 1;
-}
-
-.toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.violations {
-  background: var(--app-warn-bg);
-  border: 1px solid var(--app-warn-border);
-  border-radius: 8px;
-  padding: 0.5rem 1rem;
-  margin: 0.75rem 0;
-}
-.violations ul {
-  margin: 0.25rem 0 0;
-  padding-left: 1.25rem;
-}
-
-.pool {
-  margin-top: 1rem;
-  border: 2px dashed var(--app-border);
-  border-radius: 8px;
-  padding: 0.25rem 1rem 0.75rem;
-}
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-.chip {
-  cursor: grab;
-}
-
-.app-footer {
-  color: var(--app-muted);
-  font-size: 0.8rem;
-  text-align: center;
-  margin-top: 1rem;
-}
-
-@page {
-  size: A4 landscape;
-  margin: 12mm;
-}
-
-@media print {
-  /* 設定欄を消し、座席表を紙の幅いっぱいに使う */
-  .workspace {
-    display: block;
-  }
-  .main {
-    position: static;
-    max-height: none;
-    overflow: visible;
-  }
-  .seat-grid-scroll {
-    overflow: visible;
-  }
-  /* 座席表を1ページに収める：席の行全体を約140mmに収まる高さにする（画面と同じ高さが上限） */
-  .app {
-    padding-bottom: 0;
-  }
-  .classroom {
-    break-inside: avoid;
-  }
-  .seat {
-    height: min(3.6rem, calc((140mm - (var(--rows, 6) - 1) * 0.5rem) / var(--rows, 6)));
-    padding: 0 0.2rem; /* 印刷では🔓を出さないので右の余白はいらない */
-  }
-  /* 列が多いときは、名前が1行に収まるよう文字を小さくする */
-  .seat .name {
-    font-size: min(0.95rem, calc(250mm / var(--cols, 6) / 7));
-    word-break: keep-all;
-  }
-  .no-print,
-  .toolbar,
-  .violations,
-  .message,
-  .hint,
-  .seat .lock {
-    display: none !important;
-  }
-  body {
-    background: #fff;
-  }
-  .panel {
-    border: none;
-  }
-  .seat.warn {
-    background: none;
-  }
+.dark {
+  --background: oklch(0.18 0.006 250);
+  --foreground: oklch(0.95 0.003 95);
+  --card: oklch(0.225 0.008 250);
+  --card-foreground: oklch(0.95 0.003 95);
+  --popover: oklch(0.225 0.008 250);
+  --popover-foreground: oklch(0.95 0.003 95);
+  --primary: oklch(0.72 0.11 158);
+  --primary-foreground: oklch(0.2 0.03 158);
+  --secondary: oklch(0.3 0.03 158);
+  --secondary-foreground: oklch(0.92 0.03 158);
+  --muted: oklch(0.27 0.006 250);
+  --muted-foreground: oklch(0.72 0.01 250);
+  --accent: oklch(0.3 0.03 158);
+  --accent-foreground: oklch(0.92 0.03 158);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.6 0.09 158);
+  --warn: oklch(0.3 0.06 50);
+  --warn-border: oklch(0.75 0.16 55);
+  --warn-foreground: oklch(0.85 0.1 60);
+  --picked: oklch(0.7 0.13 85);
+  --desk: oklch(0.7 0.07 70);
+  --sidebar: oklch(0.2 0.007 250);
 }
 
 @theme inline {
   --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
+  --font-sans: 'Geist Variable', 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic UI', Meiryo, system-ui, sans-serif;
+  --color-warn: var(--warn);
+  --color-warn-border: var(--warn-border);
+  --color-warn-foreground: var(--warn-foreground);
+  --color-picked: var(--picked);
+  --color-desk: var(--desk);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -617,48 +120,97 @@ button.icon {
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
   }
   html {
     @apply font-sans;
+  }
+  /* 数値入力の矢印を小さな入力欄でも邪魔にならないように */
+  input[type='number'] {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* サイドバーは続きがあると分かるよう、細いスクロールバーを出す（shadcn の既定は非表示） */
+[data-slot='sidebar-content'] {
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+
+/* ---------- 座席 ---------- */
+.seat-grid {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.seat {
+  position: relative;
+  height: 3.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+  user-select: none;
+}
+.seat .name {
+  font-weight: 600;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  word-break: break-all;
+}
+.seat.is-disabled {
+  background-image: repeating-linear-gradient(45deg, transparent 0 6px, var(--border) 6px 7px);
+}
+
+@page {
+  size: A4 landscape;
+  margin: 12mm;
+}
+
+@media print {
+  /* 設定欄（サイドバー）を消し、座席表を紙の幅いっぱいに使う */
+  [data-slot='sidebar'],
+  [data-slot='sidebar-rail'] {
+    display: none !important;
+  }
+  .seat-grid-scroll {
+    overflow: visible !important;
+  }
+  .classroom {
+    break-inside: avoid;
+  }
+  /* 座席表を1ページに収める：席の行全体を約140mmに収まる高さにする（画面と同じ高さが上限） */
+  .seat {
+    height: min(3.75rem, calc((140mm - (var(--rows, 6) - 1) * 0.5rem) / var(--rows, 6)));
+    padding: 0 0.2rem; /* 印刷では鍵アイコンを出さないので右の余白はいらない */
+    background: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  /* 列が多いときは、名前が1行に収まるよう文字を小さくする */
+  .seat .name {
+    font-size: min(0.95rem, calc(250mm / var(--cols, 6) / 7));
+    word-break: keep-all;
+  }
+  .no-print,
+  .seat .lock,
+  .seat .enable-hint {
+    display: none !important;
+  }
+  body {
+    background: #fff !important;
+  }
+  .print-plain {
+    border: none !important;
+    box-shadow: none !important;
+    --tw-ring-shadow: 0 0 #0000 !important;
+    padding: 0 !important;
   }
 }
