@@ -15,3 +15,10 @@ dist/
 
 # Presentation materials (videos, screenshots)
 席替えアプリ/
+
+# Test materials (kept locally, not published)
+outputs/
+docs/テスト項目.md
+
+# Claude Code local settings
+.claude/settings.local.json
